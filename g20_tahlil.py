@@ -1,74 +1,97 @@
 import streamlit as st
-import plotly.express as px
+import plotly.graph_objects as go
 import pandas as pd
 
-# Sahifa sozlamalari
-st.set_page_config(page_title="G20 Iqtisodiy Monitori", layout="wide")
+# 1. Sahifa dizayni va sarlavhasi
+st.set_page_config(page_title="G20 Davlatlari", layout="wide")
 
-# O'zbekcha boyitilgan ma'lumotlar bazasi
-data = {
-    'Davlat': ['Argentina', 'Avstraliya', 'Braziliya', 'Kanada', 'Xitoy', 'Fransiya', 'Germaniya', 
-               'Hindiston', 'Indoneziya', 'Italiya', 'Yaponiya', 'Meksika', 'Rossiya', 'Saudiya Arabistoni', 
-               'Janubiy Afrika', 'Janubiy Koreya', 'Turkiya', 'Buyuk Britaniya', 'AQSH'],
-    'YaIM': ['$632.8 mlrd', '$1.7 trln', '$2.1 trln', '$2.1 trln', '$18.5 trln', '$3.0 trln', '$4.4 trln', 
-            '$3.9 trln', '$1.4 trln', '$2.2 trln', '$4.2 trln', '$1.8 trln', '$1.9 trln', '$1.1 trln', 
-            '$380.9 mlrd', '$1.7 trln', '$1.1 trln', '$3.3 trln', '$27.9 trln'],
-    'Aholi_soni': ['46 mln', '26 mln', '215 mln', '40 mln', '1.4 mlrd', '68 mln', '84 mln', 
-                   '1.4 mlrd', '277 mln', '59 mln', '125 mln', '128 mln', '144 mln', '36 mln', 
-                   '60 mln', '51 mln', '85 mln', '67 mln', '339 mln'],
-    'Inflyatsiya': ['211.4%', '4.1%', '4.5%', '2.7%', '0.3%', '2.3%', '2.4%', 
-                   '5.1%', '2.8%', '0.8%', '2.5%', '4.7%', '7.4%', '1.6%', 
-                   '5.4%', '2.6%', '64.8%', '2.0%', '3.1%'],
-    'Sanoati': ['Qishloq xo\'jaligi va oziq-ovqat', 'Konchilik va qishloq xo\'jaligi', 'Sanoat va xizmat ko\'rsatish', 
-                'Energetika va xizmat ko\'rsatish', 'Ishlab chiqarish va texnologiya', 'Turizm va aviasozlik', 
-                'Mashinasozlik va kimyo', 'Xizmat ko\'rsatish va qishloq xo\'jaligi', 'Tabiiy resurslar', 
-                'Moda va avtomobilsozlik', 'Yuqori texnologiyalar va robototexnika', 'Avtomobilsozlik va neft', 
-                'Energetika va harbiy sanoat', 'Neft va gaz sanoati', 'Konchilik va qishloq xo\'jaligi', 
-                'Elektronika va kemasozlik', 'Tekstil va qurilish', 'Moliya va xizmat ko\'rsatish', 
-                'Texnologiya va moliya'],
-    'Osish_Surati': [3.5, 2.1, 2.2, 2.3, 4.6, 1.5, 1.3, 6.8, 5.0, 1.2, 1.0, 2.4, 1.8, 4.2, 1.6, 2.2, 3.0, 1.4, 2.1],
-    'iso_alpha': ['ARG', 'AUS', 'BRA', 'CAN', 'CHN', 'FRA', 'DEU', 'IND', 'IDN', 'ITA', 'JPN', 'MEX', 'RUS', 'SAU', 'ZAF', 'KOR', 'TUR', 'GBR', 'USA']
+# Ma'lumotlar bazasi (Valyuta va barcha iqtisodiy ko'rsatkichlar)
+g20_data = {
+    'AQSH': {
+        'iso': 'USA', 'yaim': '$27.9 Trln', 'aholi': '340 Mln', 
+        'inflyatsiya': '3.1%', 'per_capita': '$80,412', 'osish': 2.1, 
+        'valyuta': 'AQSH Dollari (USD)', 'sanoat': 'Moliya, Yuqori Texnologiya',
+        'tavsif': "AQSH dunyoning eng yirik iqtisodiyoti bo'lib, global moliya tizimining o'zagi hisoblanadi."
+    },
+    'Xitoy': {
+        'iso': 'CHN', 'yaim': '$18.5 Trln', 'aholi': '1.41 Mlrd', 
+        'inflyatsiya': '0.3%', 'per_capita': '$13,136', 'osish': 4.6, 
+        'valyuta': 'Xitoy Yuani (CNY)', 'sanoat': 'Ishlab chiqarish, IT',
+        'tavsif': "Xitoy dunyoning ikkinchi yirik iqtisodiyoti va eng yirik eksportyor davlatidir."
+    },
+    'Braziliya': {
+        'iso': 'BRA', 'yaim': '$2.3 Trln', 'aholi': '217 Mln', 
+        'inflyatsiya': '3.8%', 'per_capita': '$10,600', 'osish': 2.2, 
+        'valyuta': 'Braziliya Reali (BRL)', 'sanoat': 'Qishloq xo\'jaligi, Neft sanoati',
+        'tavsif': "Braziliya Janubiy Amerikaning iqtisodiy yetakchisi bo'lib, tabiiy resurslarga juda boy."
+    },
+    'Germaniya': {
+        'iso': 'DEU', 'yaim': '$4.4 Trln', 'aholi': '84 Mln', 
+        'inflyatsiya': '2.4%', 'per_capita': '$52,824', 'osish': 1.3, 
+        'valyuta': 'Yevro (EUR)', 'sanoat': 'Avtomobilsozlik, Mashinasozlik',
+        'tavsif': "Germaniya Yevropaning iqtisodiy dvigateli va jahon muhandislik markazi hisoblanadi."
+    },
+    'Turkiya': {
+        'iso': 'TUR', 'yaim': '$1.1 Trln', 'aholi': '85 Mln', 
+        'inflyatsiya': '64.8%', 'per_capita': '$12,800', 'osish': 3.0, 
+        'valyuta': 'Turk Lirasi (TRY)', 'sanoat': 'To'qimachilik, Qurilish, Turizm',
+        'tavsif': "Turkiya Yevropa va Osiyo chorrahasida joylashgan muhim sanoat va savdo markazidir."
+    },
+    'Rossiya': {
+        'iso': 'RUS', 'yaim': '$1.9 Trln', 'aholi': '144 Mln', 
+        'inflyatsiya': '7.4%', 'per_capita': '$13,200', 'osish': 1.8, 
+        'valyuta': 'Rossiya Rubli (RUB)', 'sanoat': 'Energetika, Harbiy sanoat',
+        'tavsif': "Rossiya dunyoning eng yirik energiya resurslari eksportyorlaridan biri hisoblanadi."
+    }
 }
-df = pd.DataFrame(data)
 
-# Sarlavha
-st.title("🌐 G20 davlatlari")
+# 2. Asosiy Sarlavha
+st.markdown("<h1 style='text-align: center;'>🌐 G20 Davlatlari</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
-# Xaritani yaratish (Gradiyent rang bilan)
-fig = px.choropleth(df, 
-                    locations="iso_alpha", 
-                    color="Osish_Surati", 
-                    hover_name="Davlat",
-                    hover_data={
-                        'YaIM': True, 
-                        'Aholi_soni': True, 
-                        'Inflyatsiya': True, 
-                        'Sanoati': True,
-                        'Osish_Surati': ':.1f%'
-                    },
-                    color_continuous_scale="Viridis", 
-                    projection="orthographic",
-                    labels={'Osish_Surati': 'Iqtisodiy o\'sish'})
+# 3. Sidebar (Tanlash paneli)
+st.sidebar.header("🗺️ Boshqaruv Paneli")
+selected_country = st.sidebar.selectbox("Davlatni tanlang:", list(g20_data.keys()))
 
-# Dizayn: Ochiq ko'k okean
+# 4. Globus (Plotly)
+fig = go.Figure()
+
+fig.add_trace(go.Choropleth(
+    locations=[v['iso'] for v in g20_data.values()],
+    z=[v['osish'] for v in g20_data.values()],
+    colorscale="Viridis",
+    marker_line_color='white',
+    colorbar=dict(title="O'sish %", orientation='h', y=-0.2)
+))
+
 fig.update_geos(
-    showocean=True, oceancolor="LightBlue", 
-    showcountries=True, countrycolor="white"
+    projection_type="orthographic", showocean=True, oceancolor="#0E1117",
+    showcountries=True, countrycolor="white", bgcolor="rgba(0,0,0,0)"
 )
-
-# Legendani (rang shkalasini) pastga gorizontal holatda qo'yish
-fig.update_layout(
-    height=750, 
-    margin={"r":0,"t":50,"l":0,"b":100},
-    coloraxis_colorbar=dict(
-        title="Iqtisodiy o'sish (%)",
-        thicknessmode="pixels", thickness=15,
-        lenmode="pixels", len=350,
-        yanchor="top", y=-0.05,
-        xanchor="center", x=0.5,
-        orientation="h"
-    )
-)
+fig.update_layout(height=600, margin={"r":0,"t":0,"l":0,"b":0}, paper_bgcolor="rgba(0,0,0,0)")
 
 st.plotly_chart(fig, use_container_width=True)
+
+# 5. Ma'lumotlar Paneli (st.metric bloklari)
+st.markdown(f"## 📊 {selected_country}: Iqtisodiy Umumiy Ko'rinish")
+c = g20_data[selected_country]
+
+# Qisqa tavsif (Rasmdagi kabi matn)
+st.info(c['tavsif'])
+
+# Ma'lumotlar bloklari (Metrics)
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("YaIM (Nominal)", c['yaim'])
+    st.metric("Inflyatsiya darajasi", c['inflyatsiya'])
+
+with col2:
+    st.metric("Aholi soni", c['aholi'])
+    st.metric("Jon boshiga YaIM", c['per_capita'])
+
+with col3:
+    st.metric("Yillik o'sish", f"{c['osish']}%")
+    st.metric("Rasmiy valyuta", c['valyuta'])
+
+st.markdown(f"Asosiy sanoat tarmoqlari: {c['sanoat']}")
