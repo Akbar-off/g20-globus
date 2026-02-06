@@ -5,7 +5,7 @@ import pandas as pd
 # 1. Sahifa sozlamalari
 st.set_page_config(page_title="G20 Davlatlari", layout="wide")
 
-# Ma'lumotlar bazasi (Barcha xatolar tuzatilgan versiya)
+# Ma'lumotlar bazasi (Barcha G20 davlatlari uchun namunaviy ma'lumotlar)
 g20_data = {
     "AQSH": {
         "iso": "USA", "yaim": "$27.9 Trln", "aholi": "340 Mln", 
@@ -43,45 +43,56 @@ g20_data = {
         "valyuta": "Hind Rupiyasi (INR)", "sanoat": "IT, Farmatsevtika",
         "tavsif": "Hindiston dunyoning eng tez o'sayotgan yirik iqtisodiyotlaridan biri hisoblanadi."
     },
-    "Yaponiya": {
-        "iso": "JPN", "yaim": "$4.2 Trln", "aholi": "125 Mln", 
-        "inflyatsiya": "2.5%", "per_capita": "$33,800", "osish": 1.0, 
-        "valyuta": "Yen (JPY)", "sanoat": "Robototexnika, Avtomobilsozlik",
-        "tavsif": "Yaponiya yuqori texnologiyalar va aniq muhandislik sohasida dunyo yetakchisidir."
+    "Rossiya": {
+        "iso": "RUS", "yaim": "$1.9 Trln", "aholi": "144 Mln", 
+        "inflyatsiya": "7.4%", "per_capita": "$13,200", "osish": 1.8, 
+        "valyuta": "Rossiya Rubli (RUB)", "sanoat": "Energetika, Harbiy sanoat",
+        "tavsif": "Rossiya dunyoning eng yirik energiya resurslari eksportyorlaridan biri hisoblanadi."
     }
 }
 
-# 2. Dizayn va Interfeys
+# 2. Sarlavha
 st.markdown("<h1 style='text-align: center;'>🌐 G20 Davlatlari</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
-selected_country = st.sidebar.selectbox("Davlatni tanlang:", list(g20_data.keys()))
+# 3. Sidebar orqali davlatni tanlash (Bu pastdagi bloklarni yangilaydi)
+st.sidebar.header("🗺️ Boshqaruv Paneli")
+selected_country = st.sidebar.selectbox("Ma'lumotlarni ko'rish uchun davlatni tanlang:", list(g20_data.keys()))
 
-# 3. Globus (Qora fonda interaktiv)
+# 4. Globus (Ochiq ko'k okean bilan)
 fig = go.Figure()
 
 fig.add_trace(go.Choropleth(
     locations=[v['iso'] for v in g20_data.values()],
     z=[v['osish'] for v in g20_data.values()],
+    text=list(g20_data.keys()),
     colorscale="Viridis",
     marker_line_color='white',
     colorbar=dict(title="O'sish %", orientation='h', y=-0.2)
 ))
 
 fig.update_geos(
-    projection_type="orthographic", showocean=True, oceancolor="#0E1117",
-    showcountries=True, countrycolor="white", bgcolor="rgba(0,0,0,0)"
+    projection_type="orthographic", 
+    showocean=True, 
+    oceancolor="LightBlue", # Okean ochiq ko'k rangda
+    showcountries=True, 
+    countrycolor="white"
 )
-fig.update_layout(height=600, margin={"r":0,"t":0,"l":0,"b":0}, paper_bgcolor="rgba(0,0,0,0)")
+
+fig.update_layout(
+    height=600, 
+    margin={"r":0,"t":0,"l":0,"b":0},
+    paper_bgcolor="rgba(0,0,0,0)"
+)
 
 st.plotly_chart(fig, use_container_width=True)
 
-# 4. Ma'lumotlar Bloklari (st.metric)
+# 5. Dinamik Ma'lumotlar Paneli (Tanlangan davlatga qarab o'zgaradi)
 st.markdown(f"### 📊 {selected_country}: Iqtisodiy Ko'rinish")
 c = g20_data[selected_country]
 
 st.info(c['tavsif'])
-
+# Bloklar (st.metric)
 col1, col2, col3 = st.columns(3)
 with col1:
     st.metric("YaIM (Nominal)", c['yaim'])
