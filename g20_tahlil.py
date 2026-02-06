@@ -47,59 +47,15 @@ g20_data = {
         "per_capita": "$33,800", "osish": 1.0, "valyuta": "Yen (JPY)", 
         "sanoat": "Robototexnika, Avtomobilsozlik", "tavsif": "Yaponiya yuqori texnologiyalar va aniq muhandislik sohasida dunyo yetakchisidir."
     },
-    "Buyuk Britaniya": {
-        "iso": "GBR", "yaim": "$3.3 Trln", "aholi": "67 Mln", "inflyatsiya": "2.0%", 
-        "per_capita": "$49,100", "osish": 1.4, "valyuta": "Funt Sterling (GBP)", 
-        "sanoat": "Moliya, Turizm", "tavsif": "London moliya markazi bo'lib, Britaniya iqtisodiyotining asosiy qismini tashkil etadi."
-    },
-    "Fransiya": {
-        "iso": "FRA", "yaim": "$3.0 Trln", "aholi": "68 Mln", "inflyatsiya": "2.3%", 
-        "per_capita": "$44,400", "osish": 1.5, "valyuta": "Yevro (EUR)", 
-        "sanoat": "Aviasozlik, Turizm", "tavsif": "Fransiya jahonning eng ko'p sayyoh tashrif buyuradigan davlati va yetakchi sanoat o'lkasidir."
+    "Italiya": {
+        "iso": "ITA", "yaim": "$2.2 Trln", "aholi": "59 Mln", "inflyatsiya": "0.8%", 
+        "per_capita": "$37,700", "osish": 1.2, "valyuta": "Yevro (EUR)", 
+        "sanoat": "Moda, Mashinasozlik", "tavsif": "Italiya Yevropaning eng kuchli ishlab chiqarish bazalaridan biri hisoblanadi."
     },
     "Kanada": {
         "iso": "CAN", "yaim": "$2.1 Trln", "aholi": "40 Mln", "inflyatsiya": "2.7%", 
         "per_capita": "$52,700", "osish": 2.3, "valyuta": "Kanada Dollari (CAD)", 
-        "sanoat": "Energetika, Konchilik", "tavsif": "Kanada dunyodagi eng boy tabiiy resurslarga ega bo'lgan iqtisodiyotlardan biridir."},
-    "Italiya": {
-        "iso": "ITA", "yaim": "$2.2 Trln", "aholi": "59 Mln", "inflyatsiya": "0.8%", 
-        "per_capita": "$37,700", "osish": 1.2, "valyuta": "Yevro (EUR)", 
-        "sanoat": "Moda, Dizayn, Mashinasozlik", "tavsif": "Italiya o'zining dizayni, san'ati va mashinasozlik sanoati bilan dunyoga tanilgan."
-    },
-    "Janubiy Koreya": {
-        "iso": "KOR", "yaim": "$1.7 Trln", "aholi": "51 Mln", "inflyatsiya": "2.6%", 
-        "per_capita": "$33,100", "osish": 2.2, "valyuta": "Vona (KRW)", 
-        "sanoat": "Elektronika, Kemasozlik", "tavsif": "Koreya jahonning eng innovatsion va yuqori texnologiyali iqtisodiyotlaridan biridir."
-    },
-    "Meksika": {
-        "iso": "MEX", "yaim": "$1.8 Trln", "aholi": "128 Mln", "inflyatsiya": "4.7%", 
-        "per_capita": "$13,900", "osish": 2.4, "valyuta": "Meksika Pesosi (MXN)", 
-        "sanoat": "Avtomobilsozlik, Neft", "tavsif": "Meksika Lotin Amerikasining AQSH bilan kuchli savdo aloqalariga ega asosiy iqtisodiyotidir."
-    },
-    "Saudiya Arabistoni": {
-        "iso": "SAU", "yaim": "$1.1 Trln", "aholi": "36 Mln", "inflyatsiya": "1.6%", 
-        "per_capita": "$30,400", "osish": 4.2, "valyuta": "Saudiya Riali (SAR)", 
-        "sanoat": "Neft, Gaz sanoati", "tavsif": "Saudiya Arabistoni dunyodagi eng yirik neft eksportyori bo'lib, yangi iqtisodiy islohotlar (Vision 2030) o'tkazmoqda."
-    },
-    "Indoneziya": {
-        "iso": "IDN", "yaim": "$1.4 Trln", "aholi": "277 Mln", "inflyatsiya": "2.8%", 
-        "per_capita": "$4,900", "osish": 5.0, "valyuta": "Indoneziya Rupiyasi (IDR)", 
-        "sanoat": "Tabiiy resurslar, Qishloq xo'jaligi", "tavsif": "Indoneziya Janubi-sharqiy Osiyoning eng yirik iqtisodiyoti va muhim resurs markazidir."
-    },
-    "Avstraliya": {
-        "iso": "AUS", "yaim": "$1.7 Trln", "aholi": "26 Mln", "inflyatsiya": "4.1%", 
-        "per_capita": "$64,900", "osish": 2.1, "valyuta": "Avstraliya Dollari (AUD)", 
-        "sanoat": "Konchilik, Ta'lim", "tavsif": "Avstraliya barqaror iqtisodiyot va boy foydali qazilmalarga ega davlatdir."
-    },
-    "Janubiy Afrika": {
-        "iso": "ZAF", "yaim": "$380.9 Mlrd", "aholi": "60 Mln", "inflyatsiya": "5.4%", 
-        "per_capita": "$6,100", "osish": 1.6, "valyuta": "Rand (ZAR)", 
-        "sanoat": "Konchilik, Qimmatbaho metallar", "tavsif": "Janubiy Afrika qit'adagi eng rivojlangan iqtisodiyotlardan biri bo'lib, boy oltin va olmos konlariga ega."
-    },
-    "Argentina": {
-        "iso": "ARG", "yaim": "$632.8 Mlrd", "aholi": "46 Mln", "inflyatsiya": "211.4%", 
-        "per_capita": "$13,700", "osish": -3.5, "valyuta": "Argentina Pesosi (ARS)", 
-        "sanoat": "Qishloq xo'jaligi, Chorvachilik", "tavsif": "Argentina o'zining qishloq xo'jaligi eksporti va boy tabiiy resurslari bilan mashhur."
+        "sanoat": "Energetika, Texnologiya", "tavsif": "Kanada boy tabiiy resurslar va rivojlangan xizmat ko'rsatish sohasiga ega."
     }
 }
 
@@ -108,11 +64,10 @@ st.markdown("<h1 style='text-align: center;'>🌐 G20 Davlatlari: Iqtisodiy Moni
 st.markdown("---")
 
 st.sidebar.header("🗺️ Boshqaruv Paneli")
-selected_country = st.sidebar.selectbox("Ma'lumotlarni ko'rish uchun davlatni tanlang:", list(g20_data.keys()))
+selected_country = st.sidebar.selectbox("Davlatni tanlang:", list(g20_data.keys()))
 
-# 3. Globus (Ochiq ko'k okean bilan)
+# 3. Globus (Ochiq ko'k okean)
 fig = go.Figure()
-
 fig.add_trace(go.Choropleth(
     locations=[v['iso'] for v in g20_data.values()],
     z=[v['osish'] for v in g20_data.values()],
@@ -123,25 +78,35 @@ fig.add_trace(go.Choropleth(
 ))
 
 fig.update_geos(
-    projection_type="orthographic", showocean=True, oceancolor="LightBlue",
-    showcountries=True, countrycolor="white"
+    projection_type="orthographic", 
+    showocean=True, 
+    oceancolor="LightBlue", # Okean ochiq ko'k
+    showcountries=True, 
+    countrycolor="white"
 )
 
 fig.update_layout(height=600, margin={"r":0,"t":0,"l":0,"b":0}, paper_bgcolor="rgba(0,0,0,0)")
 
 st.plotly_chart(fig, use_container_width=True)
 
-# 4. Dinamik Ma'lumotlar Bloklari
+# 4. Dinamik Ma'lumotlar Paneli (st.metric)
 st.markdown(f"### 📊 {selected_country}: Iqtisodiy Ko'rinish")
 c = g20_data[selected_country]
 
-st.info(c['tavsif'])col1, col2, col3 = st.columns(3)
+# Tavsif bloki
+st.info(c['tavsif'])
+
+# Ma'lumot bloklari (st.metric)
+col1, col2, col3 = st.columns(3)
+
 with col1:
     st.metric("YaIM (Nominal)", c['yaim'])
     st.metric("Inflyatsiya", c['inflyatsiya'])
+
 with col2:
     st.metric("Aholi soni", c['aholi'])
     st.metric("Jon boshiga YaIM", c['per_capita'])
+
 with col3:
     st.metric("Yillik o'sish", f"{c['osish']}%")
     st.metric("Valyuta", c['valyuta'])
