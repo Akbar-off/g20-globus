@@ -32,7 +32,7 @@ g20_data = {
 st.sidebar.title("🛠️ G20 Globus")
 selected_country = st.sidebar.selectbox("Davlat yoki Ittifoqni tanlang:", list(g20_data.keys()))
 
-st.markdown(f"<h1 style='text-align: center;'>🌐 G20 & EI: Iqtisodiy Monitor</h1>", unsafe_allow_html=True)
+st.markdown(f"<h1 style='text-align: center;'>🌐 G20 : Iqtisodiy Malumot</h1>", unsafe_allow_html=True)
 st.markdown("---")
 
 # 3. Globus (Ochiq ko'k okean)
@@ -77,4 +77,5 @@ fig_trend.update_layout(xaxis=dict(tickmode='linear'), yaxis=dict(title='Foizda 
 
 st.plotly_chart(fig_trend, use_container_width=True)
 st.markdown(f"Asosiy sanoat: {c['sanoat']}")
+
 
